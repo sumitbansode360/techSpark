@@ -1,0 +1,34 @@
+venv/
+.env
+
+# Python compiled files
+*.pyc
+*.pyo
+__pycache__/
+
+# Django database
+db.sqlite3
+*.sqlite3
+
+# Django static and media files
+/static/
+/media/
+
+# IDE and editor files
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# Logs
+*.log
+
+# MacOS and other system files
+.DS_Store
+Thumbs.db
+
+# Coverage reports
+htmlcov/
+.coverage
+*.cover
+*.py,cover
