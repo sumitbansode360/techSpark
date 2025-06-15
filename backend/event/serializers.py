@@ -29,3 +29,20 @@ class EventSerializer(ModelSerializer):
         for uploaded_item in uploaded_data:
             ImageGallery.objects.create(event = new_event, image = uploaded_item)
         return new_event
+    
+    def update(self, instance, validated_data):
+        uploaded_data = validated_data.pop('uploaded_images', [])
+
+        # Update the regular fields
+        for attr, value in validated_data.items():
+            setattr(instance, attr, value)
+        instance.save()
+
+        # Delete old images 
+        ImageGallery.objects.filter(event=instance).delete()
+
+        # Add new uploaded images
+        for uploaded_item in uploaded_data:
+            ImageGallery.objects.create(event=instance, image=uploaded_item)
+
+        return instance
