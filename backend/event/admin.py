@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Event, ImageGallery
+from .models import Event, ImageGallery, Booking
 
 class EventImageGalleryInline(admin.TabularInline):
     model = ImageGallery
@@ -12,3 +12,4 @@ class ProductAdmin(admin.ModelAdmin):
 
 admin.site.register(Event, ProductAdmin)
 admin.site.register(ImageGallery)
+admin.site.register(Booking)

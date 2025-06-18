@@ -21,3 +21,10 @@ class ImageGallery(models.Model):
     class Meta:
         verbose_name = "Event Image"
         verbose_name_plural = "Event Images"
+
+
+class Booking(models.Model):
+    event = models.ForeignKey(Event, related_name='bookings', on_delete=models.CASCADE)
+    user = models.ForeignKey(User, related_name='user', on_delete=models.CASCADE)
+    booked_at = models.DateTimeField(auto_now_add=True)
+    

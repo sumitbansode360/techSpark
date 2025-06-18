@@ -11,6 +11,8 @@ import EventDetail from './pages/EventDetail.jsx'
 import EventCreate from './pages/EventCreate.jsx'
 import EventUpdate from './pages/EventUpdate.jsx'
 import EventDelete from './pages/EventDelete.jsx'
+import BookingSuccess from './pages/BookingSuccess.jsx'
+import BookingHistory from './pages/BookingHistory.jsx'
 
 const route = createBrowserRouter([
 
@@ -47,6 +49,16 @@ const route = createBrowserRouter([
   {
     path : '/event/delete/:id',
     element : <ProtectedRoute><EventDelete /></ProtectedRoute> ,
+    errorElement : <NotFound />
+  },
+  {
+    path : '/event/booking/:id',
+    element : <ProtectedRoute><BookingSuccess /></ProtectedRoute> ,
+    errorElement : <NotFound />
+  },
+    {
+    path : '/event/booking/history',
+    element : <ProtectedRoute><BookingHistory /></ProtectedRoute> ,
     errorElement : <NotFound />
   },
 ])

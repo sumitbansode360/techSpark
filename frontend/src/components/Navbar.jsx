@@ -36,7 +36,7 @@ function Navbar() {
             </ul>
           </li>
           <li>
-            <Link to="booking-history.html">Booking History</Link>
+            <Link to={`/event/booking/history`}>Booking History</Link>
           </li>
         </ul>
       </div>

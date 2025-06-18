@@ -1,5 +1,5 @@
 from rest_framework.serializers import ModelSerializer
-from .models import Event, ImageGallery
+from .models import Event, ImageGallery, Booking
 from rest_framework.serializers import SerializerMethodField
 from rest_framework import serializers
 
@@ -46,3 +46,12 @@ class EventSerializer(ModelSerializer):
             ImageGallery.objects.create(event=instance, image=uploaded_item)
 
         return instance
+
+
+class BookingSerializer(ModelSerializer):
+    
+    class Meta:
+        model = Booking
+        fields = ['id', 'event', 'user', 'booked_at']
+        read_only_fields = ['event', 'user', 'booked_at']
+

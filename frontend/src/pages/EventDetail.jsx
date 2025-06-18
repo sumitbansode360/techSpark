@@ -3,6 +3,7 @@ import api from "../api";
 import "../style/style.css";
 import { useParams, useNavigate, Link } from "react-router-dom";
 import Navbar from "../components/Navbar";
+import BookingSuccess from "./BookingSuccess";
 
 export default function EventDetail() {
   const { id } = useParams();
@@ -15,8 +16,8 @@ export default function EventDetail() {
     async function getUser() {
       try {
         const res = await api.get("api/user/whoami/");
-        const data = res.data
-        setUser(data.id)
+        const data = res.data;
+        setUser(data.id);
       } catch (error) {
         console.error("Failed to fetch event:", error);
       }
@@ -36,12 +37,32 @@ export default function EventDetail() {
     }
 
     getEventDetail();
-  }, [id]); // ✅ Use `id`, not `event`, in dependency array
+  }, [id]);
 
+  async function handleBooking(e) {
+    e.preventDefault();
+    console.log("button clicked");
+
+    try {
+      const res = await api.post(`/api/events/${event.id}/book/`);
+      if (res.status === 201) {
+        navigate(`/event/booking/${event.id}`);
+      } else {
+        alert("Something went wrong. Please try again.");
+      }
+    } catch (error) {
+      if (error.response && error.response.status === 400) {
+            alert("Booking full! No seats left.");
+      } 
+      else {
+          console.error("Booking failed:", error);
+            alert("Something went wrong while booking. Try again later.");
+      }    
+    }
+  }
   if (!event) return <p>Loading...</p>;
 
   return (
-    
     <>
       <Navbar />
       <main className="main-content">
@@ -124,7 +145,12 @@ export default function EventDetail() {
                   <span className="price">₹{event.price}</span>
                   <span className="price-note">Limited seats</span>
                 </div>
-                <button className="btn-primary btn-large">Book Now</button>
+                <button
+                  onClick={handleBooking}
+                  className="btn-primary btn-large"
+                >
+                  Book Now
+                </button>
               </div>
             </div>
           </div>
