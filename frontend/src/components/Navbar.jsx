@@ -1,8 +1,16 @@
 import React from "react";
 import "../style/style.css";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+
 
 function Navbar() {
+  const navigate = useNavigate()
+
+    async function Logout() {
+    localStorage.removeItem('ACCESS_TOKEN');
+    localStorage.removeItem('REFRESH_TOKEN');
+    navigate('/login')
+  }
   return (
     <nav className="navbar">
       <div className="nav-container">
@@ -31,7 +39,7 @@ function Navbar() {
                 <Link to={'/register'}>Register</Link>
               </li>
               <li>
-                <Link to="#logout">Logout</Link>
+                <button onClick={Logout}>Logout</button>
               </li>
             </ul>
           </li>
