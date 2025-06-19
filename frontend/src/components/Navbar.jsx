@@ -15,7 +15,7 @@ function Navbar() {
     <nav className="navbar">
       <div className="nav-container">
         <div className="nav-brand">
-            <Link to={'/'}><h2>TechEvents</h2></Link>
+            <Link to={'/'}><h2>TechSpark</h2></Link>
         </div>
 
         <input type="checkbox" id="nav-toggle" className="nav-toggle" />
