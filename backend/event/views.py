@@ -47,7 +47,8 @@ class BookEventView(CreateAPIView):
         serializer = self.get_serializer(booking)
         
         return Response(serializer.data, status=status.HTTP_201_CREATED)
-    
+
+#booking history 
 class BookedHistory(ListAPIView):
     def get(self, request):
         bookings = Booking.objects.filter(user=request.user).order_by('-booked_at')
